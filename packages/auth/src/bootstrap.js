@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import App from './App';
 import { createMemoryHistory, createBrowserHistory } from 'history';
 
-const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath}) => {
     const history = defaultHistory || createMemoryHistory({
         initialEntries: [initialPath]
     });
@@ -13,7 +13,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
     }
 
     ReactDom.render(
-        <App history={history} />,
+        <App onSignIn={onSignIn} history={history} />,
         el
     );
 
@@ -28,7 +28,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
 };
 
 if(process.env.NODE_ENV === 'development') {
-    const devRoot = document.querySelector('#_marketing-dev-root');
+    const devRoot = document.querySelector('#_auth-dev-root');
 
     if(devRoot) {
         mount(devRoot, { defaultHistory: createBrowserHistory });
